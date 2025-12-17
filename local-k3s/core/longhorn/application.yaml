@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://charts.longhorn.io
     chart: longhorn
-    targetRevision: 1.10.0   # Helm chart version
+    targetRevision: 1.10.1   # Helm chart version
     helm:
       valueFiles:
         - values.yaml
