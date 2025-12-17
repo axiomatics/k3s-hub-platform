@@ -28,10 +28,15 @@ spec:
           defaultClass: true
           defaultFsType: ext4
           defaultClassReplicaCount: 2
+
+        csi:
+          attacherReplicaCount: 1      # Default: 3
+          provisionerReplicaCount: 1   # Default: 3
+          resizerReplicaCount: 1       # Default: 3
+          snapshotterReplicaCount: 1   # Default: 3
         
-        longhornUI:
-          replicas: 1
-          service:
+        service:
+          ui:
             type: NodePort
             nodePort: 30090
         
@@ -54,6 +59,7 @@ spec:
               memory: 256Mi
         
         longhornUI:
+          replicas: 1
           resources:
             limits:
               cpu: 200m
