@@ -11,6 +11,7 @@ spec:
     chart: longhorn
     targetRevision: 1.10.1   # Helm chart version
     helm:
+      skipHooks: true
       valueFiles:
         - values.yaml
 
@@ -24,4 +25,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - DisableHooks=true
+      - ServerSideApply=true

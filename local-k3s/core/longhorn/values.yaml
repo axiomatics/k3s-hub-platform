@@ -3,25 +3,46 @@ defaultSettings:
   defaultDataPath: /var/lib/longhorn
   storageOverProvisioningPercentage: 200
   storageMinimalAvailablePercentage: 10
+  upgradeChecker: false
 
 persistence:
   defaultClass: true
   defaultFsType: ext4
+  defaultClassReplicaCount: 2
+  reclaimPolicy: Delete
+
 
 longhornUI:
   replicas: 1
   service:
     type: NodePort
     nodePort: 30090
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
 
-resources:
-  limits:
-    cpu: 500m
-    memory: 512Mi
-  requests:
-    cpu: 100m
-    memory: 256Mi
+longhornManager:
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+longhornDriver:
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
 
 preUpgradeChecker:
-  jobEnabled: false        # ✅ THIS disables the Job
+  jobEnabled: false
   upgradeVersionCheck: false
