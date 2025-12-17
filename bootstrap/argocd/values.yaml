@@ -1,0 +1,52 @@
+redis-ha:
+  enabled: false
+
+server:
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+  metrics:
+    enabled: true
+  podLabels:
+    tags.datadoghq.com/env: "k3s-hub-onprem"
+    tags.datadoghq.com/service: "argocd-server"
+  service:
+    type: NodePort
+    nodePortHttp: 32080
+    nodePortHttps: 32443
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    
+repoServer:
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+  metrics:
+    enabled: true
+  podLabels:
+    tags.datadoghq.com/env: "k3s-hub-onprem"
+    tags.datadoghq.com/service: "argocd-repo-server"
+
+controller:
+  metrics:
+    enabled: true
+  podLabels:
+    tags.datadoghq.com/env: "k3s-hub-onprem"
+    tags.datadoghq.com/service: "argocd-applicationset-controller"
+
+
+## Custom resource configuration
+crds:
+  # -- Keep CRDs on chart uninstall default true
+  keep: false
+
+
+configs:
+  params:
+    server.insecure: true
