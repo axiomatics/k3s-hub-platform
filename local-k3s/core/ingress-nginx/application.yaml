@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
     chart: ingress-nginx
-    targetRevision: 3.12.0   # Helm chart version pinned
+    targetRevision: 4.14.0   # Helm chart version pinned
     helm:
       valueFiles:
         - values.yaml
