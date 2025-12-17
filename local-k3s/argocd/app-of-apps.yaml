@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/axiomatics/k3s-hub-platform
+    repoURL: https://github.com/axiomatics/k3s-hub-platform.git
     targetRevision: main
     path: local-k3s
     directory:
