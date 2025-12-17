@@ -23,4 +23,5 @@ resources:
     memory: 256Mi
 
 preUpgradeChecker:
-  jobEnabled: true
+  jobEnabled: false        # ✅ THIS disables the Job
+  upgradeVersionCheck: false
