@@ -26,7 +26,7 @@ spec:
       
       containers:
       - name: wazuh-agent
-        image: wazuh/wazuh-agent:4.11.1
+        image: wazuh/wazuh-agent:4.14.0
         
         # Privileged mode for host monitoring
         securityContext:
