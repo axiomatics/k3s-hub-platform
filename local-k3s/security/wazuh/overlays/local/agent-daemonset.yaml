@@ -83,12 +83,12 @@ spec:
           
           # Docker socket
           - name: docker-socket
-            mountPath: /var/run/docker.sock
+            mountPath: /run/k3s/containerd/containerd.sock
             readOnly: true
           
           # Container logs
           - name: container-logs
-            mountPath: /var/lib/docker/containers
+            mountPath: /var/lib/rancher/k3s/agent/containerd/io.containerd.grpc.v1.cri/containers
             readOnly: true
           
           # Kubernetes logs
@@ -109,12 +109,12 @@ spec:
         
         - name: docker-socket
           hostPath:
-            path: /var/run/docker.sock
+            path: /run/k3s/containerd/containerd.sock
             type: Socket
         
         - name: container-logs
           hostPath:
-            path: /var/lib/docker/containers
+            path: /var/lib/rancher/k3s/agent/containerd/io.containerd.grpc.v1.cri/containers
         
         - name: k8s-logs
           hostPath:
