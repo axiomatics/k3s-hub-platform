@@ -5,6 +5,8 @@ metadata:
   name: wazuh-indexer-wazuh-indexer-0
 spec:
   storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi  # Reduced for local dev
@@ -17,6 +19,8 @@ metadata:
   name: wazuh-manager-wazuh-manager-master-0
 spec:
   storageClassName: longhorn
+  accessModes:
+    - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi  # Reduced for local dev
