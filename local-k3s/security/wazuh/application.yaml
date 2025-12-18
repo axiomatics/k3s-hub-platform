@@ -10,6 +10,7 @@ spec:
     - repoURL: https://github.com/wazuh/wazuh-kubernetes.git
       targetRevision: v4.14.0
       path: envs/local-env
+      ref: wazuh_repo # Add this alias
       kustomize: {}
 
     - repoURL: https://github.com/axiomatics/k3s-hub-platform.git  # Your Git repo
