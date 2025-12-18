@@ -1,0 +1,22 @@
+# Patch for Indexer storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wazuh-indexer-wazuh-indexer-0
+spec:
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 5Gi  # Reduced for local dev
+
+---
+# Patch for Manager storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wazuh-manager-wazuh-manager-master-0
+spec:
+  storageClassName: longhorn
+  resources:
+    requests:
+      storage: 5Gi  # Reduced for local dev

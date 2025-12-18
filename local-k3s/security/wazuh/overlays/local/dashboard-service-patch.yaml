@@ -1,0 +1,28 @@
+# overlays/local/manager-service-patch.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: wazuh
+spec:
+  type: NodePort
+  ports:
+    # Agent communication
+    - name: agents
+      port: 1514
+      targetPort: 1514
+      nodePort: 31514
+      protocol: TCP
+    
+    # Agent enrollment
+    - name: enrollment
+      port: 1515
+      targetPort: 1515
+      nodePort: 31515
+      protocol: TCP
+    
+    # API
+    - name: api
+      port: 55000
+      targetPort: 55000
+      nodePort: 30055
+      protocol: TCP

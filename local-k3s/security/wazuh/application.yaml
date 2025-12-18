@@ -7,13 +7,15 @@ spec:
   project: default
 
   source:
-    repoURL: https://packages.wazuh.com/4.x/helm
-    chart: wazuh
-    targetRevision: 4.7.2
-    helm:
-      valueFiles:
-        - values.yaml
+    - repoURL: https://github.com/wazuh/wazuh-kubernetes.git
+      targetRevision: v4.14.0
+      path: envs/local-env
+      ref: wazuh-base
 
+    - repoURL: https://github.com/yourorg/k3s-hub-platform.git  # Your Git repo
+      targetRevision: main
+      path: security/wazuh/overlays/local
+    
   destination:
     server: https://kubernetes.default.svc
     namespace: wazuh
