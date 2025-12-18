@@ -5,7 +5,6 @@ namespace: wazuh
 
 # Reference to Wazuh base manifests
 resources:
-  - github.com/wazuh/wazuh-kubernetes/envs/local-env?ref=v4.10.2
   - agent-daemonset.yaml
 
 # Apply patches from separate files

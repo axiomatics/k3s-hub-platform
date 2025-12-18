@@ -12,7 +12,7 @@ spec:
       path: envs/local-env
       ref: wazuh-base
 
-    - repoURL: https://github.com/yourorg/k3s-hub-platform.git  # Your Git repo
+    - repoURL: https://github.com/axiomatics/k3s-hub-platform.git  # Your Git repo
       targetRevision: main
       path: security/wazuh/overlays/local
     
