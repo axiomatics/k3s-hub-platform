@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
 
-  source:
+  sources:
     - repoURL: https://github.com/wazuh/wazuh-kubernetes.git
       targetRevision: v4.14.0
       path: envs/local-env
