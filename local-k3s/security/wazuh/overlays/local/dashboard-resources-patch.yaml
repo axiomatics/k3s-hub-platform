@@ -5,7 +5,15 @@ metadata:
   namespace: wazuh
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: wazuh-dashboard
+      wazuh.io/component: dashboard
   template:
+    metadata:
+      labels:
+        app: wazuh-dashboard
+        wazuh.io/component: dashboard
     spec:
       containers:
       - name: wazuh-dashboard

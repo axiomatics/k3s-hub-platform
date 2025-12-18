@@ -30,16 +30,12 @@ secretGenerator:
       - ../../wazuh/certs/indexer_cluster/http-key.pem
       - ../../wazuh/certs/indexer_cluster/transport-key.pem
       - ../../wazuh/certs/indexer_cluster/node-ca.pem
+    options:
+      disableNameSuffixHash: true
   - name: dashboard-certs
     files:
       - ../../wazuh/certs/dashboard_http/cert.pem
       - ../../wazuh/certs/dashboard_http/key.pem
+    options:
+      disableNameSuffixHash: true
 
-# Common labels (optional)
-commonLabels:
-  environment: local
-  managed-by: argocd
-
-# Common annotations (optional)
-commonAnnotations:
-  deployed-by: argocd
