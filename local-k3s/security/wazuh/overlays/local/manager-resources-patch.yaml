@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: wazuh-manager-master
+  namespace: wazuh
+spec:
+  replicas: 1  # Single replica for local dev
+  template:
+    spec:
+      containers:
+      - name: wazuh-manager
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 1000m
+            memory: 2Gi
+        env:
+          # Disable clustering for single-node setup
+          - name: WAZUH_CLUSTER_DISABLED
+            value: "yes"
