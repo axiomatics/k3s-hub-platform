@@ -3,17 +3,13 @@ kind: Kustomization
 
 namespace: wazuh
 
-# Reference to Wazuh base manifests
-resources:
+patchesStrategicMerge:
+  - indexer-resources-patch.yaml
+  - manager-resources-patch.yaml
+  - dashboard-resources-patch.yaml
+  - dashboard-service-patch.yaml
+  - storage-patch.yaml
   - agent-daemonset.yaml
-
-# Apply patches from separate files
-patches:
-  - path: indexer-resources-patch.yaml
-  - path: manager-resources-patch.yaml
-  - path: dashboard-resources-patch.yaml
-  - path: dashboard-service-patch.yaml
-  - path: storage-patch.yaml
 
 # Common labels (optional)
 commonLabels:
