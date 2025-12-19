@@ -1,9 +1,18 @@
 indexer:
-  persistence:
-    storageClass: "longhorn"
-    storageSize: 5Gi
+  images:
+    resources:
+      requests:
+        cpu: 700m
+        memory: 2Gi
+      limits:
+        memory: 3Gi
+  storageSize: 10Gi
   
 wazuh:
+  master:
+    persistence:
+      storageClass: "longhorn"
+      storageSize: 5Gi
   manager:
     persistence:
       storageClass: "longhorn"
@@ -31,3 +40,6 @@ dashboard:
     type: NodePort
     port: 443
     nodePort: 30443
+
+ingress:
+  enabled: false
