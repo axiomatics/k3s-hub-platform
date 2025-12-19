@@ -9,9 +9,53 @@ spec:
     repoURL: 'https://morgoved.github.io/wazuh-helm/' #
     chart: wazuh
     targetRevision: 1.0.13 # Check for latest stable version
-    helm:
-      valueFiles:
-        - values.yaml # This refers to your custom values in your GitOps repo
+    values: |
+      indexer:
+        images:
+          resources:
+            requests:
+              cpu: 700m
+              memory: 2Gi
+            limits:
+              memory: 3Gi
+        storageSize: 10Gi
+        
+      wazuh:
+        master:
+          persistence:
+            storageClass: "longhorn"
+            storageSize: 5Gi
+        manager:
+          persistence:
+            storageClass: "longhorn"
+            storageSize: 5Gi
+        worker:
+          persistence:
+            storageClass: "longhorn"
+            storageSize: 5Gi
+        images:
+          resources:
+            requests:
+              cpu: 700m
+              memory: 2000Mi
+            limits:
+              memory: 3Gi
+          worker_resources:
+            requests:
+              cpu: 1000m
+              memory: 2Gi
+            limits:
+              memory: 3Gi
+
+      dashboard:
+        service:
+          type: NodePort
+          port: 5601
+          nodePort: 30443
+
+ingress:
+  enabled: false
+      # Custom values for Wazuh deployment
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: wazuh
