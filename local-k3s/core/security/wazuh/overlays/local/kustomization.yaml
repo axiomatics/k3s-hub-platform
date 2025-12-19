@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: wazuh
+
+# Reference base
+resources:
+  - ../../wazuh/
+
+# Patches for local environment
+patchesStrategicMerge:
+  - resources-patch.yaml
+  - service-patch.yaml
+  - storage-class.yaml
+  - wazuh-resources.yaml
