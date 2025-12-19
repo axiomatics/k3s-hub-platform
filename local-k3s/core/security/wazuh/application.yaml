@@ -12,13 +12,14 @@ spec:
     helm:
         values: |
           indexer:
+            replicas: 1
             images:
               resources:
                 requests:
                   cpu: 700m
-                  memory: 2Gi
+                  memory: 1Gi
                 limits:
-                  memory: 3Gi
+                  memory: 2Gi
             storageSize: 10Gi 
           wazuh:
             master:
@@ -30,6 +31,7 @@ spec:
                 storageClass: "longhorn"
               storageSize: 5Gi
             worker:
+              replicas: 1
               persistence:
                 storageClass: "longhorn"
               storageSize: 5Gi
@@ -37,15 +39,15 @@ spec:
               resources:
                 requests:
                   cpu: 700m
-                  memory: 2000Mi
+                  memory: 1500Mi
                 limits:
-                  memory: 3Gi
+                  memory: 1Gi
               worker_resources:
                 requests:
                   cpu: 1000m
-                  memory: 2Gi
+                  memory: 1Gi
                 limits:
-                  memory: 3Gi
+                  memory: 1Gi
           dashboard:
             service:
               type: NodePort
