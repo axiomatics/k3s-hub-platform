@@ -9,9 +9,10 @@ spec:
   source:
     repoURL: https://github.com/axiomatics/k3s-hub-platform.git
     targetRevision: main
-    path: local-k3s
+    path: local-k3s/argocd
     directory:
       recurse: true
+      exclude: '{**/kustomization.yaml,**/overlays/**}'
 
   destination:
     server: https://kubernetes.default.svc
