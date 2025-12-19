@@ -1,11 +1,16 @@
 indexer:
   persistence:
-    storageClass: "longhorn" # k3s default
+    storageClass: "longhorn"
+    size: 5Gi
   
 wazuh:
   manager:
     persistence:
-      storageClass: "longhorn" # k3s default
+      storageClass: "longhorn"
+      size: 5Gi
 
-# The chart uses cert-manager for internal TLS
-# No need to manually run certificate scripts!
+dashboard:
+  service:
+    type: NodePort
+    port: 443
+    nodePort: 30443
