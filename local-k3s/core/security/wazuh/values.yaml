@@ -1,13 +1,30 @@
 indexer:
   persistence:
     storageClass: "longhorn"
-    size: 5Gi
+    storageSize: 5Gi
   
 wazuh:
   manager:
     persistence:
       storageClass: "longhorn"
-      size: 5Gi
+      storageSize: 5Gi
+  worker:
+    persistence:
+      storageClass: "longhorn"
+      storageSize: 5Gi
+  images:
+    resources:
+      requests:
+        cpu: 700m
+        memory: 2000Mi
+      limits:
+        memory: 3Gi
+    worker_resources:
+      requests:
+        cpu: 1000m
+        memory: 2Gi
+      limits:
+        memory: 3Gi
 
 dashboard:
   service:
