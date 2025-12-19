@@ -12,7 +12,7 @@ spec:
     helm:
         values: |
           agent:
-            enabled: false
+            enabled: true
           indexer:
             replicas: 1
             images:
