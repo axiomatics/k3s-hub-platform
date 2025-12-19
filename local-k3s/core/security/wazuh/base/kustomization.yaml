@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: wazuh
+
+resources:
+  # Reference official Wazuh repository
+  - https://github.com/wazuh/wazuh-kubernetes.git -b v4.14.1 --depth=1
+  # Include namespace
+  - namespace.yaml
