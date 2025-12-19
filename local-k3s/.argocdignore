@@ -1,0 +1,6 @@
+**/wazuh/kustomization.yaml
+**/wazuh/base/**
+**/wazuh/certs/**
+**/wazuh/indexer_stack/**
+**/wazuh/secrets/**
+**/wazuh/wazuh_managers/**
