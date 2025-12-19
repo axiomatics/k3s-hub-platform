@@ -10,6 +10,7 @@ spec:
     repoURL: https://github.com/axiomatics/k3s-hub-platform.git
     targetRevision: main
     path: local-k3s/core/security/wazuh/overlays/local
+    kustomize: {} 
 
   destination:
     server: https://kubernetes.default.svc
