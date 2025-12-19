@@ -19,21 +19,20 @@ spec:
                   memory: 2Gi
                 limits:
                   memory: 3Gi
-            storageSize: 10Gi
-            
+            storageSize: 10Gi 
           wazuh:
             master:
               persistence:
                 storageClass: "longhorn"
-                storageSize: 5Gi
+              storageSize: 5Gi
             manager:
               persistence:
                 storageClass: "longhorn"
-                storageSize: 5Gi
+              storageSize: 5Gi
             worker:
               persistence:
                 storageClass: "longhorn"
-                storageSize: 5Gi
+              storageSize: 5Gi
             images:
               resources:
                 requests:
@@ -47,15 +46,14 @@ spec:
                   memory: 2Gi
                 limits:
                   memory: 3Gi
+          dashboard:
+            service:
+              type: NodePort
+              port: 5601
+              nodePort: 30443
 
-            dashboard:
-              service:
-                type: NodePort
-                port: 5601
-                nodePort: 30443
-
-            ingress:
-              enabled: false
+          ingress:
+            enabled: false
       # Custom values for Wazuh deployment
   destination:
     server: 'https://kubernetes.default.svc'
