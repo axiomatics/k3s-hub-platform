@@ -8,8 +8,7 @@ resources:
   - ../../wazuh/
 
 # Patches for local environment
-patchesStrategicMerge:
-  - resources-patch.yaml
-  - service-patch.yaml
-  - storage-class.yaml
-  - wazuh-resources.yaml
+patches:
+- path: storage-class.yaml
+- path: indexer-resources.yaml
+- path: wazuh-resources.yaml
