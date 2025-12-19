@@ -5,7 +5,7 @@ namespace: wazuh
 
 # Reference base
 resources:
-  - github.com/wazuh/wazuh-kubernetes?ref=v4.14.1
+  - https://github.com/wazuh/wazuh-kubernetes//envs/local-env?ref=v4.14.1
 
 # Patches for local environment
 patches:
