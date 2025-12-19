@@ -1,0 +1,11 @@
+indexer:
+  persistence:
+    storageClass: "longhorn" # k3s default
+  
+wazuh:
+  manager:
+    persistence:
+      storageClass: "longhorn" # k3s default
+
+# The chart uses cert-manager for internal TLS
+# No need to manually run certificate scripts!
