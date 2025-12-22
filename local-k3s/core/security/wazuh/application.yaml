@@ -40,6 +40,7 @@ spec:
               persistence:
                 storageClass: "longhorn"
               storageSize: 18Gi
+              tolerations: "hostname=k3s-w1" 
             manager:
               persistence:
                 storageClass: "longhorn"
@@ -49,6 +50,7 @@ spec:
               persistence:
                 storageClass: "longhorn"
               storageSize: 5Gi
+              tolerations: "hostname=k3s-w2" 
             images:
               resources:
                 requests:
