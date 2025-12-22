@@ -1,6 +1,9 @@
 redis-ha:
   enabled: false
 
+dex:
+  enabled: false
+
 server:
   autoscaling:
     enabled: false

@@ -39,7 +39,7 @@ spec:
             master:
               persistence:
                 storageClass: "longhorn"
-              storageSize: 15Gi
+              storageSize: 18Gi
             manager:
               persistence:
                 storageClass: "longhorn"
