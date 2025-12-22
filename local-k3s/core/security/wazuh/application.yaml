@@ -12,7 +12,7 @@ spec:
     helm:
         values: |
           agent:
-            enabled: true
+            enabled: false
             resources:
               requests:
                 cpu: 200m
@@ -39,7 +39,7 @@ spec:
             master:
               persistence:
                 storageClass: "longhorn"
-              storageSize: 5Gi
+              storageSize: 15Gi
             manager:
               persistence:
                 storageClass: "longhorn"
