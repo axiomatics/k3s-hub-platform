@@ -35,19 +35,17 @@ spec:
                 limits:
                   memory: 1Gi
             storageSize: 10Gi 
+            storageClass: "local-path"
           wazuh:
             master:
-              persistence:
-                storageClass: ""
+              storageClass: "local-path"
               storageSize: 15Gi
             manager:
-              persistence:
-                storageClass: ""
+              storageClass: "local-path"
               storageSize: 5Gi
             worker:
               replicas: 1
-              persistence:
-                storageClass: ""
+              storageClass: "local-path"
               storageSize: 5Gi
             images:
               resources:
