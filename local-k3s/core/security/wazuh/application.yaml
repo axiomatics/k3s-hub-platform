@@ -12,7 +12,14 @@ spec:
     helm:
         values: |
           agent:
-            enabled: false
+            enabled: true
+            kind: DaemonSet
+            nodeSelector:
+              node-role.kubernetes.io/control-plane: "true"
+            tolerations:
+              - key: "node-role.kubernetes.io/control-plane"
+                operator: "Exists"
+                effect: "NoSchedule"
             resources:
               requests:
                 cpu: 200m
