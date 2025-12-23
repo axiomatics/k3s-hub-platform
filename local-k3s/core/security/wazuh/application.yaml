@@ -38,19 +38,17 @@ spec:
           wazuh:
             master:
               persistence:
-                storageClass: "longhorn"
-              storageSize: 18Gi
-              tolerations: "hostname=k3s-w1" 
+                storageClass: ""
+              storageSize: 15Gi
             manager:
               persistence:
-                storageClass: "longhorn"
+                storageClass: ""
               storageSize: 5Gi
             worker:
               replicas: 1
               persistence:
-                storageClass: "longhorn"
+                storageClass: ""
               storageSize: 5Gi
-              tolerations: "hostname=k3s-w2" 
             images:
               resources:
                 requests:
