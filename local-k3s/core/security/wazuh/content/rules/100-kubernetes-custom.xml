@@ -1,0 +1,43 @@
+<group name="kubernetes,threat_hunting">
+
+  <!-- 1️⃣ Pod exec -->
+  <rule id="100001" level="12">
+    <if_matched_sid>kubernetes_audit</if_matched_sid>
+    <field name="data.verb">create</field>
+    <field name="data.objectRef.subresource">exec</field>
+
+    <description>Kubernetes pod exec detected</description>
+
+    <mitre>
+      <id>T1059</id> <!-- Command and Scripting Interpreter -->
+    </mitre>
+
+    <options>no_full_log</options>
+  </rule>
+
+  <!-- 2️⃣ Namespace deletion -->
+  <rule id="100002" level="13">
+    <if_matched_sid>kubernetes_audit</if_matched_sid>
+    <field name="data.verb">delete</field>
+    <field name="data.objectRef.resource">namespaces</field>
+
+    <description>Kubernetes namespace deleted</description>
+
+    <mitre>
+      <id>T1485</id> <!-- Data Destruction -->
+    </mitre>
+  </rule>
+
+  <!-- 3️⃣ RBAC changes -->
+  <rule id="100003" level="15">
+    <if_matched_sid>kubernetes_audit</if_matched_sid>
+    <field name="data.objectRef.apiGroup">rbac.authorization.k8s.io</field>
+
+    <description>Kubernetes RBAC object modified</description>
+
+    <mitre>
+      <id>T1098</id> <!-- Account Manipulation -->
+    </mitre>
+  </rule>
+
+</group>
