@@ -21,13 +21,13 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: indexer-cred
-                  key: username
+                  key: INDEXER_USERNAME
 
             - name: OS_PASS
               valueFrom:
                 secretKeyRef:
                   name: indexer-cred
-                  key: password
+                  key: INDEXER_PASSWORD
 
           command: ["/bin/sh", "-lc"]
           args:
