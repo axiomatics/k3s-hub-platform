@@ -1,0 +1,91 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: wazuh-apply-ism
+  namespace: wazuh
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: apply-ism
+          image: curlimages/curl:8.5.0
+          env:
+            - name: OS_HOST
+              value: "https://wazuh-indexer:9200"
+
+            - name: OS_USER
+              valueFrom:
+                secretKeyRef:
+                  name: indexer-cred
+                  key: username
+
+            - name: OS_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: indexer-cred
+                  key: password
+
+          command: ["/bin/sh", "-lc"]
+          args:
+            - |
+              set -e
+
+              echo "Waiting for Wazuh Indexer..."
+              for i in $(seq 1 60); do
+                if curl -sk -u "${OS_USER}:${OS_PASS}" \
+                  "${OS_HOST}/_cluster/health" >/dev/null; then
+                  break
+                fi
+                sleep 5
+              done
+
+              echo "Creating / updating ISM policy wazuh-7d..."
+              curl -sk -u "${OS_USER}:${OS_PASS}" \
+                -H "Content-Type: application/json" \
+                -X PUT "${OS_HOST}/_plugins/_ism/policies/wazuh-7d" \
+                -d '{
+                  "policy": {
+                    "description": "Wazuh retention: rollover daily, delete after 7 days",
+                    "default_state": "hot",
+                    "states": [
+                      {
+                        "name": "hot",
+                        "actions": [
+                          {
+                            "rollover": {
+                              "min_index_age": "1d"
+                            }
+                          }
+                        ],
+                        "transitions": [
+                          {
+                            "state_name": "delete",
+                            "conditions": {
+                              "min_index_age": "7d"
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "name": "delete",
+                        "actions": [
+                          { "delete": {} }
+                        ]
+                      }
+                    ]
+                  }
+                }'
+
+              echo "Attaching policy to wazuh indices..."
+              for pattern in "wazuh-alerts-*" "wazuh-events-*"; do
+                curl -sk -u "${OS_USER}:${OS_PASS}" \
+                  -H "Content-Type: application/json" \
+                  -X POST "${OS_HOST}/_plugins/_ism/add/${pattern}" \
+                  -d '{ "policy_id": "wazuh-7d" }' || true
+              done
+
+              echo "ISM policy applied successfully."
