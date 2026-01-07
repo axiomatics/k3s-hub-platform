@@ -7,12 +7,28 @@ indexer:
       limits:
         memory: 3Gi
   storageSize: 10Gi
+  extraEnvs:
+      - name: OPENSEARCH_JAVA_OPTS
+        value: "-Xms1g -Xmx1g"
   
 wazuh:
   master:
     persistence:
       storageClass: "longhorn"
       storageSize: 5Gi
+      extraConf: |
+        <rules>
+          <include>100-kubernetes-custom.xml</include>
+        </rules>
+        additionalVolumes:
+          - name: wazuh-custom-rules
+            configMap:
+              name: wazuh-custom-rules
+
+        additionalVolumeMounts:
+          - name: wazuh-custom-rules
+            mountPath: /var/ossec/etc/rules/100-kubernetes-custom.xml
+            subPath: 100-kubernetes-custom.xml
   manager:
     persistence:
       storageClass: "longhorn"
