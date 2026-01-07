@@ -1,0 +1,31 @@
+pack:
+  id: k8s-audit
+  name: "Kubernetes Audit: Core Detections"
+  version: "0.1.0"
+  enabled: true
+  stage: experimental
+
+taxonomy:
+  capability: threat_hunting
+  domain: kubernetes
+  source: apiserver_audit
+  feature: core_detections
+  mitre:
+    - TA0002
+    - TA0004
+    - TA0006
+
+targets:
+  environments: ["local-k3s"]
+  agents: ["detection-advisor", "k8s-triage"]
+
+runtime:
+  rule_id_range: "100001-100049"
+  output:
+    rules_file: "content/runtime/rules/110-k8s-audit.xml"
+
+notes:
+  false_positive_risks:
+    - "Cluster admins using kubectl exec legitimately"
+    - "CI/CD systems reading secrets"
+    - "GitOps controllers applying RBAC"

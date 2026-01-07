@@ -1,0 +1,51 @@
+<decoders>
+
+  <!-- Base Kubernetes Audit decoder (JSON line) -->
+  <decoder name="k8s_audit_base">
+    <!-- Commonly audit events contain "kind":"Event" and "apiVersion":"audit.k8s.io/..." -->
+    <prematch>\{"kind":"Event","apiVersion":"audit\.k8s\.io/</prematch>
+  </decoder>
+
+  <!-- Extract verb -->
+  <decoder name="k8s_audit_verb">
+    <parent>k8s_audit_base</parent>
+    <regex>"verb":"([^"]+)"</regex>
+    <order>k8s.verb</order>
+  </decoder>
+
+  <!-- Extract requestURI -->
+  <decoder name="k8s_audit_uri">
+    <parent>k8s_audit_base</parent>
+    <regex>"requestURI":"([^"]+)"</regex>
+    <order>k8s.uri</order>
+  </decoder>
+
+  <!-- Extract response status code -->
+  <decoder name="k8s_audit_code">
+    <parent>k8s_audit_base</parent>
+    <regex>"responseStatus":\{"metadata":\{\},"code":([0-9]+)</regex>
+    <order>k8s.code</order>
+  </decoder>
+
+  <!-- Extract user.username -->
+  <decoder name="k8s_audit_user">
+    <parent>k8s_audit_base</parent>
+    <regex>"user":\{"username":"([^"]+)"</regex>
+    <order>k8s.user</order>
+  </decoder>
+
+  <!-- Extract source IP (first in sourceIPs array) -->
+  <decoder name="k8s_audit_srcip">
+    <parent>k8s_audit_base</parent>
+    <regex>"sourceIPs":\["([^"]+)"</regex>
+    <order>srcip</order>
+  </decoder>
+
+  <!-- Extract objectRef: resource, namespace, name, subresource -->
+  <decoder name="k8s_audit_objectref">
+    <parent>k8s_audit_base</parent>
+    <regex>"objectRef":\{"resource":"([^"]+)"(,"namespace":"([^"]+)")?(,"name":"([^"]+)")?(,"subresource":"([^"]+)")?</regex>
+    <order>k8s.resource,k8s.namespace,k8s.name,k8s.subresource</order>
+  </decoder>
+
+</decoders>

@@ -4,7 +4,7 @@ metadata:
   name: wazuh-custom-rules
   namespace: wazuh
 data:
-  100-kubernetes-custom.xml: |
+  110-k8s-audit.xml: |
     <group name="kubernetes,threat_hunting">
       <rule id="100001" level="12">
         <if_matched_sid>kubernetes_audit</if_matched_sid>
