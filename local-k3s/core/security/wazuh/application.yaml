@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://morgoved.github.io/wazuh-helm/' #
     chart: wazuh
-    targetRevision: 1.0.13 # Check for latest stable version
+    targetRevision: 1.0.15 # Check for latest stable version
     helm:
         values: |
           agent:
@@ -47,6 +47,15 @@ spec:
             master:
               storageClass: "local-path"
               storageSize: 15Gi
+              additionalVolumes:
+                - name: wazuh-runtime-rules
+                  configMap:
+                    name: wazuh-runtime-rules
+              additionalVolumeMounts:
+                - name: wazuh-runtime-rules
+                  mountPath: /var/ossec/etc/rules/110-k8s-audit.xml
+                  subPath: 110-k8s-audit.xml
+                  readOnly: true
             manager:
               storageClass: "local-path"
               storageSize: 5Gi
