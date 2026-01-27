@@ -20,7 +20,7 @@ data:
         <options>no_full_log</options>
       </rule>
 
-      <!-- 2️⃣ Namespace deletion -->
+      <!-- 2️ Namespace deletion -->
       <rule id="100002" level="13">
         <if_matched_sid>kubernetes_audit</if_matched_sid>
         <field name="data.verb">delete</field>
@@ -33,7 +33,7 @@ data:
         </mitre>
       </rule>
 
-      <!-- 3️⃣ RBAC changes -->
+      <!-- 3️ RBAC changes -->
       <rule id="100003" level="15">
         <if_matched_sid>kubernetes_audit</if_matched_sid>
         <field name="data.objectRef.apiGroup">rbac.authorization.k8s.io</field>
