@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: wazuh-custom-rules
+  name: wazuh-runtime-rules
   namespace: wazuh
 data:
   110-k8s-audit.xml: |
