@@ -32,6 +32,15 @@ spec:
                 value: "wazuh-manager-master"
               - name: WAZUH_GROUP
                 value: "k3s-nodes"
+            volumes:
+              - name: k3s-audit-logs
+                hostPath:
+                  path: /var/lib/rancher/k3s/server/logs
+                  type: DirectoryOrCreate
+            volumeMounts:
+              - name: k3s-audit-logs
+                mountPath: /var/lib/rancher/k3s/server/logs
+                readOnly: true
           indexer:
             replicas: 1
             images:
